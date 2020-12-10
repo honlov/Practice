@@ -53,12 +53,12 @@ resource "azurerm_network_security_rule" "nsg_rule" {
   resource_group_name         = azurerm_resource_group.RG1.name
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
-# Associate NSG to subnet ::::COMMENT WHILE DISTORYING::::
+# Associate NSG to subnet
 resource "azurerm_subnet_network_security_group_association" "nsg_associate" {
   subnet_id                 = azurerm_subnet.subnet.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
-# Associate NSG to NIC ::::COMMENT WHILE DISTORYING::::
+# Associate NSG to NIC
 resource "azurerm_network_interface_security_group_association" "nsg_associate_nic" {
   network_interface_id      = azurerm_network_interface.nic.id
   network_security_group_id = azurerm_network_security_group.nsg.id
@@ -103,6 +103,7 @@ resource "azurerm_virtual_machine" "vm" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
+# Copy index.html to VM at tmp location
   provisioner "file" {
     source      = "./index.html"
     destination = "/tmp/index.html"
@@ -113,6 +114,7 @@ resource "azurerm_virtual_machine" "vm" {
       host     = azurerm_public_ip.publicip.ip_address
     }
   }
+# Copy ports.conf to VM at tmp location, it is to change the web server port
   provisioner "file" {
     source      = "./ports.conf"
     destination = "/tmp/ports.conf"
@@ -123,6 +125,7 @@ resource "azurerm_virtual_machine" "vm" {
       host     = azurerm_public_ip.publicip.ip_address
     }
   }
+# This will install apache and copy index.html and port.conf to required location
   provisioner "remote-exec" {
     connection {
       type     = "ssh"
