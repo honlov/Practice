@@ -76,6 +76,11 @@ resource "azurerm_network_interface" "nic" {
     public_ip_address_id          = azurerm_public_ip.publicip.id
   }
 }
+# use Key vault for login cred
+data "azurerm_key_vault" "mySecret" {
+  name      = "useradmin"
+  resource_group_name = "cloud-shell-storage-eastus"
+}
 # Create Virtual Machine
 resource "azurerm_virtual_machine" "vm" {
   name                  = "mini-proj"
@@ -103,7 +108,7 @@ resource "azurerm_virtual_machine" "vm" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
-# Copy index.html to VM at tmp location
+  # Copy index.html to VM at tmp location
   provisioner "file" {
     source      = "./index.html"
     destination = "/tmp/index.html"
@@ -114,7 +119,7 @@ resource "azurerm_virtual_machine" "vm" {
       host     = azurerm_public_ip.publicip.ip_address
     }
   }
-# Copy ports.conf to VM at tmp location, it is to change the web server port
+  # Copy ports.conf to VM at tmp location, it is to change the web server port
   provisioner "file" {
     source      = "./ports.conf"
     destination = "/tmp/ports.conf"
@@ -125,7 +130,7 @@ resource "azurerm_virtual_machine" "vm" {
       host     = azurerm_public_ip.publicip.ip_address
     }
   }
-# This will install apache and copy index.html and port.conf to required location
+  # This will install apache and copy index.html and port.conf to required location
   provisioner "remote-exec" {
     connection {
       type     = "ssh"
