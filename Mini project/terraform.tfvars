@@ -1,6 +1,6 @@
 location           = "eastus"
 admin_username     = "azureuser"
-admin_password     = "Password1234!"
+admin_password     = "${data.azurerm_key_vault_secret.mySecret.value}
 vnet_address_space = ["10.0.0.0/16", "10.1.0.0/16"]
 vnet_info          = ["TFAzure-Vnet", true, ["10.0.0.0/16", "10.1.0.0/16"]]
 os = {
