@@ -5,7 +5,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "RG1" {
-  name     = "mini-project"
+  name     = var.MainRG
   location = var.location
   tags = {
     Enviroment = "Dev"
@@ -77,9 +77,13 @@ resource "azurerm_network_interface" "nic" {
   }
 }
 # use Key vault for login cred
-data "azurerm_key_vault" "mySecret" {
-  name      = "useradmin"
-  resource_group_name = "cloud-shell-storage-eastus"
+data "azurerm_key_vault" "azkv" {
+  name                = var.KeyVaultname
+  resource_group_name = var.KeyVault_RG
+}
+data "azurerm_key_vault_secret" "mySecret" {
+  name         = "useradmin"
+  key_vault_id = data.azurerm_key_vault.azkv.id
 }
 # Create Virtual Machine
 resource "azurerm_virtual_machine" "vm" {
@@ -103,7 +107,7 @@ resource "azurerm_virtual_machine" "vm" {
   os_profile {
     computer_name  = "mini-project"
     admin_username = var.admin_username
-    admin_password = var.admin_password
+    admin_password = data.azurerm_key_vault_secret.mySecret.value
   }
   os_profile_linux_config {
     disable_password_authentication = false
@@ -115,7 +119,7 @@ resource "azurerm_virtual_machine" "vm" {
     connection {
       type     = "ssh"
       user     = var.admin_username
-      password = var.admin_password
+      password = data.azurerm_key_vault_secret.mySecret.value
       host     = azurerm_public_ip.publicip.ip_address
     }
   }
@@ -126,7 +130,7 @@ resource "azurerm_virtual_machine" "vm" {
     connection {
       type     = "ssh"
       user     = var.admin_username
-      password = var.admin_password
+      password = data.azurerm_key_vault_secret.mySecret.value
       host     = azurerm_public_ip.publicip.ip_address
     }
   }
@@ -135,7 +139,7 @@ resource "azurerm_virtual_machine" "vm" {
     connection {
       type     = "ssh"
       user     = var.admin_username
-      password = var.admin_password
+      password = data.azurerm_key_vault_secret.mySecret.value
       host     = azurerm_public_ip.publicip.ip_address
     }
     inline = [
