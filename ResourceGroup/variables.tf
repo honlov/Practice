@@ -3,12 +3,12 @@ variable "admin_username" {
   type        = string
   description = "Administrator username for Virutal machine"
 }
-variable "KeyVaultname" {
+variable "admin_password" {
   type        = string
   description = "Password must meet Azure Complexity requirements"
 }
 variable "vnet_address_space" {
-  type        = list(any)
+  type        = list
   description = "Address space for Virtual Network"
   default     = ["10.0.0.0/16"]
 }
@@ -17,7 +17,7 @@ variable "vnet_info" {
   description = "Vnet Information"
 }
 variable "managed_disk_type" {
-  type        = map(any)
+  type        = map
   description = "Disk type Premium in Primary location Stardard in DR Location"
   default = {
     westus2 = "Premium_LRS"
@@ -34,14 +34,6 @@ variable "os" {
   })
 }
 variable "inbound_rules" {
-  type        = map(any)
+  type        = map
   description = "A map of allowed inbound ports and their priority value"
-}
-variable "KeyVault_RG" {
-  type        = string
-  description = "Key Vault Resource group name"
-}
-variable "MainRG" {
-  type        = string
-  description = "Main Resource group where all resources has to build"
 }

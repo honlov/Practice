@@ -1,8 +1,6 @@
-MainRG             = "Mini-Project"
-location           = "eastus"
+location           = "westus2"
 admin_username     = "azureuser"
-KeyVaultname       = "keyvault-honlov"
-KeyVault_RG        = "cloud-shell-storage-eastus"
+admin_password     = "Password1234!"
 vnet_address_space = ["10.0.0.0/16", "10.1.0.0/16"]
 vnet_info          = ["TFAzure-Vnet", true, ["10.0.0.0/16", "10.1.0.0/16"]]
 os = {
@@ -12,6 +10,7 @@ os = {
   version   = "latest"
 }
 inbound_rules = {
-  101 = 8080
+  101 = 3389
   102 = 22
+  103 = 443
 }

@@ -1,0 +1,218 @@
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  [32m+[0m create
+[0m
+Terraform will perform the following actions:
+
+[1m  # azurerm_network_interface.nic[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_network_interface" "nic" {
+      [32m+[0m [0m[1m[0mapplied_dns_servers[0m[0m           = (known after apply)
+      [32m+[0m [0m[1m[0mdns_servers[0m[0m                   = (known after apply)
+      [32m+[0m [0m[1m[0menable_accelerated_networking[0m[0m = false
+      [32m+[0m [0m[1m[0menable_ip_forwarding[0m[0m          = false
+      [32m+[0m [0m[1m[0mid[0m[0m                            = (known after apply)
+      [32m+[0m [0m[1m[0minternal_dns_name_label[0m[0m       = (known after apply)
+      [32m+[0m [0m[1m[0minternal_domain_name_suffix[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mlocation[0m[0m                      = "westus2"
+      [32m+[0m [0m[1m[0mmac_address[0m[0m                   = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                          = "nic-dev"
+      [32m+[0m [0m[1m[0mprivate_ip_address[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mprivate_ip_addresses[0m[0m          = (known after apply)
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m           = "TFAzureLab-rg"
+      [32m+[0m [0m[1m[0mvirtual_machine_id[0m[0m            = (known after apply)
+
+      [32m+[0m [0mip_configuration {
+          [32m+[0m [0m[1m[0mname[0m[0m                          = "nic-cfg"
+          [32m+[0m [0m[1m[0mprimary[0m[0m                       = (known after apply)
+          [32m+[0m [0m[1m[0mprivate_ip_address[0m[0m            = (known after apply)
+          [32m+[0m [0m[1m[0mprivate_ip_address_allocation[0m[0m = "dynamic"
+          [32m+[0m [0m[1m[0mprivate_ip_address_version[0m[0m    = "IPv4"
+          [32m+[0m [0m[1m[0mpublic_ip_address_id[0m[0m          = (known after apply)
+          [32m+[0m [0m[1m[0msubnet_id[0m[0m                     = (known after apply)
+        }
+    }
+
+[1m  # azurerm_network_security_group.nsg[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_network_security_group" "nsg" {
+      [32m+[0m [0m[1m[0mid[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mlocation[0m[0m            = "westus2"
+      [32m+[0m [0m[1m[0mname[0m[0m                = "nsg-001"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m = "TFAzureLab-rg"
+      [32m+[0m [0m[1m[0msecurity_rule[0m[0m       = (known after apply)
+    }
+
+[1m  # azurerm_network_security_rule.nsg_rule["101"][0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_network_security_rule" "nsg_rule" {
+      [32m+[0m [0m[1m[0maccess[0m[0m                      = "Allow"
+      [32m+[0m [0m[1m[0mdestination_address_prefix[0m[0m  = "*"
+      [32m+[0m [0m[1m[0mdestination_port_range[0m[0m      = "3389"
+      [32m+[0m [0m[1m[0mdirection[0m[0m                   = "Inbound"
+      [32m+[0m [0m[1m[0mid[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                        = "port_3389"
+      [32m+[0m [0m[1m[0mnetwork_security_group_name[0m[0m = "nsg-001"
+      [32m+[0m [0m[1m[0mpriority[0m[0m                    = 101
+      [32m+[0m [0m[1m[0mprotocol[0m[0m                    = "Tcp"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m         = "TFAzureLab-rg"
+      [32m+[0m [0m[1m[0msource_address_prefix[0m[0m       = "*"
+      [32m+[0m [0m[1m[0msource_port_range[0m[0m           = "*"
+    }
+
+[1m  # azurerm_network_security_rule.nsg_rule["102"][0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_network_security_rule" "nsg_rule" {
+      [32m+[0m [0m[1m[0maccess[0m[0m                      = "Allow"
+      [32m+[0m [0m[1m[0mdestination_address_prefix[0m[0m  = "*"
+      [32m+[0m [0m[1m[0mdestination_port_range[0m[0m      = "22"
+      [32m+[0m [0m[1m[0mdirection[0m[0m                   = "Inbound"
+      [32m+[0m [0m[1m[0mid[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                        = "port_22"
+      [32m+[0m [0m[1m[0mnetwork_security_group_name[0m[0m = "nsg-001"
+      [32m+[0m [0m[1m[0mpriority[0m[0m                    = 102
+      [32m+[0m [0m[1m[0mprotocol[0m[0m                    = "Tcp"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m         = "TFAzureLab-rg"
+      [32m+[0m [0m[1m[0msource_address_prefix[0m[0m       = "*"
+      [32m+[0m [0m[1m[0msource_port_range[0m[0m           = "*"
+    }
+
+[1m  # azurerm_network_security_rule.nsg_rule["103"][0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_network_security_rule" "nsg_rule" {
+      [32m+[0m [0m[1m[0maccess[0m[0m                      = "Allow"
+      [32m+[0m [0m[1m[0mdestination_address_prefix[0m[0m  = "*"
+      [32m+[0m [0m[1m[0mdestination_port_range[0m[0m      = "443"
+      [32m+[0m [0m[1m[0mdirection[0m[0m                   = "Inbound"
+      [32m+[0m [0m[1m[0mid[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                        = "port_443"
+      [32m+[0m [0m[1m[0mnetwork_security_group_name[0m[0m = "nsg-001"
+      [32m+[0m [0m[1m[0mpriority[0m[0m                    = 103
+      [32m+[0m [0m[1m[0mprotocol[0m[0m                    = "Tcp"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m         = "TFAzureLab-rg"
+      [32m+[0m [0m[1m[0msource_address_prefix[0m[0m       = "*"
+      [32m+[0m [0m[1m[0msource_port_range[0m[0m           = "*"
+    }
+
+[1m  # azurerm_public_ip.publicip[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_public_ip" "publicip" {
+      [32m+[0m [0m[1m[0mallocation_method[0m[0m       = "Static"
+      [32m+[0m [0m[1m[0mfqdn[0m[0m                    = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0midle_timeout_in_minutes[0m[0m = 4
+      [32m+[0m [0m[1m[0mip_address[0m[0m              = (known after apply)
+      [32m+[0m [0m[1m[0mip_version[0m[0m              = "IPv4"
+      [32m+[0m [0m[1m[0mlocation[0m[0m                = "westus2"
+      [32m+[0m [0m[1m[0mname[0m[0m                    = "publicIP"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m     = "TFAzureLab-rg"
+      [32m+[0m [0m[1m[0msku[0m[0m                     = "Basic"
+    }
+
+[1m  # azurerm_resource_group.RG1[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_resource_group" "RG1" {
+      [32m+[0m [0m[1m[0mid[0m[0m       = (known after apply)
+      [32m+[0m [0m[1m[0mlocation[0m[0m = "westus2"
+      [32m+[0m [0m[1m[0mname[0m[0m     = "TFAzureLab-rg"
+      [32m+[0m [0m[1m[0mtags[0m[0m     = {
+          [32m+[0m [0m"Enviroment" = "Dev"
+        }
+    }
+
+[1m  # azurerm_subnet.subnet[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_subnet" "subnet" {
+      [32m+[0m [0m[1m[0maddress_prefix[0m[0m                                 = "10.0.0.0/24"
+      [32m+[0m [0m[1m[0maddress_prefixes[0m[0m                               = (known after apply)
+      [32m+[0m [0m[1m[0menforce_private_link_endpoint_network_policies[0m[0m = false
+      [32m+[0m [0m[1m[0menforce_private_link_service_network_policies[0m[0m  = false
+      [32m+[0m [0m[1m[0mid[0m[0m                                             = (known after apply)
+      [32m+[0m [0m[1m[0mname[0m[0m                                           = "subnet-dev-westus2-001"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m                            = "TFAzureLab-rg"
+      [32m+[0m [0m[1m[0mvirtual_network_name[0m[0m                           = "vnet-dev-westus2-001"
+    }
+
+[1m  # azurerm_virtual_machine.vm[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_virtual_machine" "vm" {
+      [32m+[0m [0m[1m[0mavailability_set_id[0m[0m              = (known after apply)
+      [32m+[0m [0m[1m[0mdelete_data_disks_on_termination[0m[0m = false
+      [32m+[0m [0m[1m[0mdelete_os_disk_on_termination[0m[0m    = false
+      [32m+[0m [0m[1m[0mid[0m[0m                               = (known after apply)
+      [32m+[0m [0m[1m[0mlicense_type[0m[0m                     = (known after apply)
+      [32m+[0m [0m[1m[0mlocation[0m[0m                         = "westus2"
+      [32m+[0m [0m[1m[0mname[0m[0m                             = "TFAzure-vm"
+      [32m+[0m [0m[1m[0mnetwork_interface_ids[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m              = "TFAzureLab-rg"
+      [32m+[0m [0m[1m[0mvm_size[0m[0m                          = "Standard_B1s"
+
+      [32m+[0m [0midentity {
+          [32m+[0m [0m[1m[0midentity_ids[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mprincipal_id[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mtype[0m[0m         = (known after apply)
+        }
+
+      [32m+[0m [0mos_profile {
+          [32m+[0m [0m[1m[0madmin_password[0m[0m = (sensitive value)
+          [32m+[0m [0m[1m[0madmin_username[0m[0m = "azureuser"
+          [32m+[0m [0m[1m[0mcomputer_name[0m[0m  = "tfAzuredev01"
+          [32m+[0m [0m[1m[0mcustom_data[0m[0m    = (known after apply)
+        }
+
+      [32m+[0m [0mos_profile_linux_config {
+          [32m+[0m [0m[1m[0mdisable_password_authentication[0m[0m = false
+        }
+
+      [32m+[0m [0mstorage_data_disk {
+          [32m+[0m [0m[1m[0mcaching[0m[0m                   = (known after apply)
+          [32m+[0m [0m[1m[0mcreate_option[0m[0m             = (known after apply)
+          [32m+[0m [0m[1m[0mdisk_size_gb[0m[0m              = (known after apply)
+          [32m+[0m [0m[1m[0mlun[0m[0m                       = (known after apply)
+          [32m+[0m [0m[1m[0mmanaged_disk_id[0m[0m           = (known after apply)
+          [32m+[0m [0m[1m[0mmanaged_disk_type[0m[0m         = (known after apply)
+          [32m+[0m [0m[1m[0mname[0m[0m                      = (known after apply)
+          [32m+[0m [0m[1m[0mvhd_uri[0m[0m                   = (known after apply)
+          [32m+[0m [0m[1m[0mwrite_accelerator_enabled[0m[0m = (known after apply)
+        }
+
+      [32m+[0m [0mstorage_image_reference {
+          [32m+[0m [0m[1m[0moffer[0m[0m     = "UbuntuServer"
+          [32m+[0m [0m[1m[0mpublisher[0m[0m = "Canonical"
+          [32m+[0m [0m[1m[0msku[0m[0m       = "16.04.0-LTS"
+          [32m+[0m [0m[1m[0mversion[0m[0m   = "latest"
+        }
+
+      [32m+[0m [0mstorage_os_disk {
+          [32m+[0m [0m[1m[0mcaching[0m[0m                   = "ReadWrite"
+          [32m+[0m [0m[1m[0mcreate_option[0m[0m             = "FromImage"
+          [32m+[0m [0m[1m[0mdisk_size_gb[0m[0m              = (known after apply)
+          [32m+[0m [0m[1m[0mmanaged_disk_id[0m[0m           = (known after apply)
+          [32m+[0m [0m[1m[0mmanaged_disk_type[0m[0m         = "Premium_LRS"
+          [32m+[0m [0m[1m[0mname[0m[0m                      = "disk1"
+          [32m+[0m [0m[1m[0mos_type[0m[0m                   = (known after apply)
+          [32m+[0m [0m[1m[0mwrite_accelerator_enabled[0m[0m = false
+        }
+    }
+
+[1m  # azurerm_virtual_network.TFAzure-vnet[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "azurerm_virtual_network" "TFAzure-vnet" {
+      [32m+[0m [0m[1m[0maddress_space[0m[0m       = [
+          [32m+[0m [0m"10.0.0.0/16",
+          [32m+[0m [0m"10.1.0.0/16",
+        ]
+      [32m+[0m [0m[1m[0mguid[0m[0m                = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mlocation[0m[0m            = "westus2"
+      [32m+[0m [0m[1m[0mname[0m[0m                = "vnet-dev-westus2-001"
+      [32m+[0m [0m[1m[0mresource_group_name[0m[0m = "TFAzureLab-rg"
+      [32m+[0m [0m[1m[0msubnet[0m[0m              = (known after apply)
+    }
+
+[0m[1mPlan:[0m 10 to add, 0 to change, 0 to destroy.[0m
+
+[33m
+[1m[33mWarning: [0m[0m[1m"address_prefix": [DEPRECATED] Use the `address_prefixes` property instead.[0m
+
+[0m  on Main.tf line 22, in resource "azurerm_subnet" "subnet":
+  22: resource "azurerm_subnet" "subnet" [4m{[0m
+[0m
+[0m[0m
+[0m[1mDo you want to perform these actions?[0m
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  [1mEnter a value:[0m [0m
+Apply cancelled.
