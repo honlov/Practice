@@ -65,7 +65,7 @@ resource "azurerm_network_interface_security_group_association" "nsg_associate_n
 }
 # Create Network Interface
 resource "azurerm_network_interface" "nic" {
-  name                = "nic-mp"
+  name                = "nic_${azurerm_resource_group.RG1.name}"
   location            = azurerm_resource_group.RG1.location
   resource_group_name = azurerm_resource_group.RG1.name
   #network_security_group_id = azurerm_network_security_group.nsg.id
