@@ -1,4 +1,5 @@
 MainRG             = "Mini-Project"
+client_secret      = "JR.e_mnFAkL-g1FX8b~E7I9rCxfP2Pj277"
 location           = "eastus"
 admin_username     = "azureuser"
 KeyVaultname       = "keyvault-honlov"

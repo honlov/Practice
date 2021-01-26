@@ -45,3 +45,6 @@ variable "MainRG" {
   type        = string
   description = "Main Resource group where all resources has to build"
 }
+variable "client_secret" {
+  type = string
+}
